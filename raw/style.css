@@ -1,0 +1,34 @@
+
+.box-fifty{
+   width:50%;
+   background-color: blue;
+}
+.box-100{
+    width:100px;
+    background-color: blue;
+
+}
+.parent{
+    width: 135px;
+
+}
+
+.vh{
+    background-color: blue;
+    height: 50vh;
+}
+.vw{
+    background-color: blue;
+    width: 50vw;
+}
+
+.rem{
+   
+     font-size: 2rem;
+}
+.em{
+     font-size: 2em;
+}
+.remparent{
+  font-size: 30px;
+}
