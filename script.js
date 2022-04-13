@@ -2,7 +2,7 @@ let addbtn=document.querySelector(".add-btn");
 let addmodel=true;
 let modelcont=document.querySelector(".model-cont");
 addbtn.addEventListener("click",function(){
-    console.log("hello");
+//Display
     if(addmodel){
        modelcont.style.display="flex";
     }
