@@ -88,6 +88,32 @@ body{
 .active{
     border: 5px solid red;
 }
+.ticket-cont{
+    background-color:lightgray;
+    height: 10rem;
+    width: 14rem;
+  
+}
+.ticket-color{
+    height: 1rem;
+    background-color: blue;
+}
+.ticket-id{
+    height: 2rem;
+    background-color: yellow;
+}
+.main-cont{
+    margin-top: 2rem;
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.ticket-area{
+    font-size: 1.5rem;
+    padding: 5px;
+    height: calc(100% - 1rem-2rem);
+}
 
 
 
