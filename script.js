@@ -4,6 +4,8 @@ let modelcont=document.querySelector(".model-cont");
 let maincont=document.querySelector(".main-cont");
 let textareacont=document.querySelector(".textarea-cont")
 let ticketcolormodel='black';
+let deletebtn=false;
+let colors=['lightpink','blue','green','black'];
 addbtn.addEventListener("click",function(){
 //Display
     if(addmodel){
@@ -47,5 +49,42 @@ function ticketdisplay(task){
     <div class="ticket-id"></div>
     <div class="ticket-area">${task}</div>`;
     maincont.appendChild(ticketcont);
+    tickethandler(ticketcont);
+    colorhandler(ticketcont);
 }
+let deletebtncont=document.querySelector(".btncolor");
+deletebtncont.addEventListener('click',function(){
+    if(deletebtn){
+        deletebtncont.style.color='black';
+    }
+    else{
+    
+        deletebtncont.style.color='red';
+    }
+    deletebtn=!deletebtn;
+})
+
+function tickethandler(ticket){
+    ticket.addEventListener('click',function(){
+        if(deletebtn){
+            ticket.remove();
+        }
+    })
+}
+
+function colorhandler(ticket){
+    let ticketcolor=ticket.querySelector('.ticket-color');
+    ticketcolor.addEventListener('click',function(){
+        let currenetcolor=ticketcolor.classList[1];
+        let currenetcoloridx=colors.findIndex(function(color){
+            return color===currenetcolor;
+        })
+        let newidx=(currenetcoloridx+1)%colors.length;
+        let newcolor=colors[newidx];
+        ticketcolor.classList.remove(currenetcolor);
+        ticketcolor.classList.add(newcolor);
+    })
+}
+
+
 

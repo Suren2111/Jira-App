@@ -8,7 +8,7 @@ body{
 }
 .tollbox-cont{
     height: 5rem;
-    background-color: black;
+    background-color:#B9F8D3;
     display: flex;
     align-items: center;
 }
@@ -19,7 +19,7 @@ body{
 
 .toolbox-priority-cont{
     height: 3rem;
-    background-color: coral;
+    background-color: #FFFBE7;
     width: 18rem;
     /* margin-left: 5rem; */
     display: flex;
@@ -34,7 +34,7 @@ body{
 }
 
 .action-btn-cont{
-    background-color: crimson;
+    background-color:#FFFBE7;
     width: 10rem;
     height: 3rem;
     /* margin-left: 5rem; */
@@ -93,7 +93,7 @@ body{
     background-color:lightgray;
     height: 10rem;
     width: 14rem;
-  
+    border:none;
 }
 .ticket-color{
     height: 1rem;
@@ -115,6 +115,9 @@ body{
     height: calc(100% - 1rem-2rem);
     padding-left: 1rem;
     padding-right: 1rem;
+}
+.btncolor{
+    color:none;
 }
 
 
