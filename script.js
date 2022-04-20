@@ -47,10 +47,30 @@ function ticketdisplay(task){
     ticketcont.setAttribute('class','ticket-cont');
     ticketcont.innerHTML=` <div class="ticket-color ${ticketcolormodel}"></div>
     <div class="ticket-id"></div>
-    <div class="ticket-area">${task}</div>`;
+    <div class="ticket-area">${task}</div>
+    <dic class="ticket-lock"><i class="fa fa-lock"></i></div>`;
     maincont.appendChild(ticketcont);
     tickethandler(ticketcont);
     colorhandler(ticketcont);
+    lockhandler(ticketcont);
+}
+
+function lockhandler(ticket){
+   let ticketlockelement=ticket.querySelector(".ticket-lock i");
+   let tickettaskarea=ticket.querySelector(".ticket-area");
+   ticketlockelement.addEventListener("click",function(){
+       if(ticketlockelement.classList.contains('fa-lock')){
+         ticketlockelement.classList.remove("fa-lock");
+         ticketlockelement.classList.add("fa-unlock");
+         tickettaskarea.setAttribute("contenteditable",'true');
+
+       }
+       else{
+        ticketlockelement.classList.remove("fa-unlock");
+        ticketlockelement.classList.add("fa-lock");
+        tickettaskarea.setAttribute("contenteditable",'false');
+       }
+   })
 }
 let deletebtncont=document.querySelector(".btncolor");
 deletebtncont.addEventListener('click',function(){
