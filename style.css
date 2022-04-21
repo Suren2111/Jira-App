@@ -94,13 +94,14 @@ body{
     height: 10rem;
     width: 14rem;
     border:none;
+    
 }
 .ticket-color{
     height: 1rem;
     /* background-color:black */
 }
 .ticket-id{
-    height: 2rem;
+    height: 1.5rem;
     background-color: skyblue;
 }
 .main-cont{
@@ -112,10 +113,11 @@ body{
 }
 .ticket-area{
     font-size: 1.5rem;
-    height: calc(100% - 1rem-2rem);
+    height: 4rem;
     padding-left: 1rem;
     padding-right: 1rem;
     outline: none;
+  
 }
 .btncolor{
     color:none;
@@ -124,8 +126,9 @@ body{
     display: flex;
     justify-content: end;
     margin-right: 1.5rem;
-    margin-top: 3rem;
+    margin-top: 2rem;
     font-size: 1.5rem;
+    height:1rem;
 }
 
 
