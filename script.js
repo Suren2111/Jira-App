@@ -6,6 +6,7 @@ let textareacont=document.querySelector(".textarea-cont")
 let ticketcolormodel='black';
 let deletebtn=false;
 let colors=['lightpink','blue','green','black'];
+var uid = new ShortUniqueId();
 addbtn.addEventListener("click",function(){
 //Display
     if(addmodel){
@@ -46,7 +47,7 @@ function ticketdisplay(task){
     let ticketcont=document.createElement('div');
     ticketcont.setAttribute('class','ticket-cont');
     ticketcont.innerHTML=` <div class="ticket-color ${ticketcolormodel}"></div>
-    <div class="ticket-id"></div>
+    <div class="ticket-id">#${uid()}</div>
     <div class="ticket-area">${task}</div>
     <dic class="ticket-lock"><i class="fa fa-lock"></i></div>`;
     maincont.appendChild(ticketcont);
