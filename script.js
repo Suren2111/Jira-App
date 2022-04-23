@@ -10,6 +10,8 @@ var uid = new ShortUniqueId();
 let ticketarr=[];
 let allcolors=document.querySelectorAll(".tool");
 for(let i=0;i<allcolors.length;i++){
+
+    //Single click events to display the specific tickets of choosen colors
     allcolors[i].addEventListener("click",function(){
        let currentcolor=allcolors[i].classList[2];
       let filterarr=ticketarr.filter(function(ticketobj){
@@ -22,12 +24,27 @@ for(let i=0;i<allcolors.length;i++){
       for(let j=0;j<filterarr.length;j++){
           ticketcolormodel=filterarr[j].color;
           let task=filterarr[j].task;
-          let ticketid=filterarr[j].ticketid;
+          let ticketid=filterarr[j].id;
           ticketdisplay(task,ticketid);
       }
       
-    });
+    })
+    //Double click events to display all the tickets before 
+    allcolors[i].addEventListener("dblclick",function(){
+        let tickets=document.querySelectorAll(".ticket-cont");
+        for(let j=0;j<tickets.length;j++){
+            tickets[j].remove();
+        }
+        for(let j=0;j<ticketarr.length;j++){
+             ticketcolormodel=ticketarr[j].color;
+             let task=ticketarr[j].task;
+             let ticketid=ticketarr[j].id;
+             ticketdisplay(task,ticketid);
+        }
+
+    })
 }
+//Added  container to enter the ticket content
 addbtn.addEventListener("click",function(){
 //Display
     if(addmodel){
@@ -40,6 +57,8 @@ addbtn.addEventListener("click",function(){
     addmodel=!addmodel;
 })
 
+
+//Added Priority colors and make active
 let allprioritycolor=document.querySelectorAll('.priority');
 for(let i=0;i<allprioritycolor.length;i++){
     let oneprioritycolor=allprioritycolor[i];
@@ -51,6 +70,8 @@ for(let i=0;i<allprioritycolor.length;i++){
         ticketcolormodel=oneprioritycolor.classList[2];
     })
 }
+
+//After Entering the content tickets have to create
 textareacont.addEventListener("keydown",function(e){
    //console.log(e);
    let value=e.key;
@@ -64,6 +85,7 @@ textareacont.addEventListener("keydown",function(e){
   }
 })
 
+//To create the tickets
 function ticketdisplay(task,ticketid){
     let id;
     if(!ticketid){
@@ -83,11 +105,12 @@ function ticketdisplay(task,ticketid){
     colorhandler(ticketcont);
     lockhandler(ticketcont);
     if(!ticketid){
-        ticketarr.push({"task":task,"color":ticketcolormodel,"id":ticketid});
+        ticketarr.push({"task":task,"color":ticketcolormodel,"id":id});
     }
     
 }
 
+//To create lock and unlock
 function lockhandler(ticket){
    let ticketlockelement=ticket.querySelector(".ticket-lock i");
    let tickettaskarea=ticket.querySelector(".ticket-area");
@@ -105,6 +128,8 @@ function lockhandler(ticket){
        }
    })
 }
+
+//Click event to change the delete button to red
 let deletebtncont=document.querySelector(".btncolor");
 deletebtncont.addEventListener('click',function(){
     if(deletebtn){
@@ -117,6 +142,7 @@ deletebtncont.addEventListener('click',function(){
     deletebtn=!deletebtn;
 })
 
+//To delete the tickets using delete button
 function tickethandler(ticket){
     ticket.addEventListener('click',function(){
         if(deletebtn){
@@ -125,6 +151,7 @@ function tickethandler(ticket){
     })
 }
 
+//To change colors of the tickets
 function colorhandler(ticket){
     let ticketcolor=ticket.querySelector('.ticket-color');
     ticketcolor.addEventListener('click',function(){
