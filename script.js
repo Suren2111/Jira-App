@@ -7,6 +7,27 @@ let ticketcolormodel='black';
 let deletebtn=false;
 let colors=['lightpink','blue','green','black'];
 var uid = new ShortUniqueId();
+let ticketarr=[];
+let allcolors=document.querySelectorAll(".tool");
+for(let i=0;i<allcolors.length;i++){
+    allcolors[i].addEventListener("click",function(){
+       let currentcolor=allcolors[i].classList[2];
+      let filterarr=ticketarr.filter(function(ticketobj){
+          return currentcolor==ticketobj.color;
+      })
+      let tickets=document.querySelectorAll(".ticket-cont");
+      for(let j=0;j<tickets.length;j++){
+          tickets[j].remove();
+      }
+      for(let j=0;j<filterarr.length;j++){
+          ticketcolormodel=filterarr[j].color;
+          let task=filterarr[j].task;
+          let ticketid=filterarr[j].ticketid;
+          ticketdisplay(task,ticketid);
+      }
+      
+    });
+}
 addbtn.addEventListener("click",function(){
 //Display
     if(addmodel){
@@ -43,17 +64,28 @@ textareacont.addEventListener("keydown",function(e){
   }
 })
 
-function ticketdisplay(task){
+function ticketdisplay(task,ticketid){
+    let id;
+    if(!ticketid){
+        id=uid();
+    }
+    else{
+        id=ticketid;
+    }
     let ticketcont=document.createElement('div');
     ticketcont.setAttribute('class','ticket-cont');
     ticketcont.innerHTML=` <div class="ticket-color ${ticketcolormodel}"></div>
-    <div class="ticket-id">#${uid()}</div>
+    <div class="ticket-id">#${id}</div>
     <div class="ticket-area">${task}</div>
     <dic class="ticket-lock"><i class="fa fa-lock"></i></div>`;
     maincont.appendChild(ticketcont);
     tickethandler(ticketcont);
     colorhandler(ticketcont);
     lockhandler(ticketcont);
+    if(!ticketid){
+        ticketarr.push({"task":task,"color":ticketcolormodel,"id":ticketid});
+    }
+    
 }
 
 function lockhandler(ticket){
@@ -106,6 +138,5 @@ function colorhandler(ticket){
         ticketcolor.classList.add(newcolor);
     })
 }
-
 
 
