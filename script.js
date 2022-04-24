@@ -32,7 +32,9 @@ for(let i=0;i<allcolors.length;i++){
     allcolors[i].addEventListener("click",function(){
        let currentcolor=allcolors[i].classList[2];
       let filterarr=ticketarr.filter(function(ticketobj){
-          return currentcolor==ticketobj.color;
+          if(currentcolor==ticketobj.color){
+              return ticketobj;
+          }
       })
       let tickets=document.querySelectorAll(".ticket-cont");
       for(let j=0;j<tickets.length;j++){
@@ -118,7 +120,7 @@ function ticketdisplay(task,ticketid){
     <div class="ticket-area">${task}</div>
     <dic class="ticket-lock"><i class="fa fa-lock"></i></div>`;
     maincont.appendChild(ticketcont);
-    tickethandler(ticketcont);
+    tickethandler(ticketcont,id);
     colorhandler(ticketcont);
     lockhandler(ticketcont);
     if(!ticketid){
@@ -163,9 +165,13 @@ deletebtncont.addEventListener('click',function(){
 })
 
 //To delete the tickets using delete button
-function tickethandler(ticket){
+function tickethandler(ticket,id){
     ticket.addEventListener('click',function(){
         if(deletebtn){
+            let ticketidx=getticketidx(id);
+            ticketarr.splice(ticketidx,1);//Remove tickets at the ticket arr 2nd para represent no of tickets to be deleted after specific idx
+            let ticketarrstr=JSON.stringify(ticketarr);
+            localStorage.setItem('tickets',ticketarrstr);
             ticket.remove();
         }
     })
@@ -184,6 +190,18 @@ function colorhandler(ticket){
         ticketcolor.classList.remove(currenetcolor);
         ticketcolor.classList.add(newcolor);
     })
+}
+
+
+//Delete the ticket in local storage when the tickets is deleted in UI
+function getticketidx(id){
+    let ticketidx=ticketarr.findIndex(function(ticketobj){
+           if(id==ticketobj.id){
+              return  ticketobj.id;
+           }
+           
+    })
+    return ticketidx;
 }
 
 
