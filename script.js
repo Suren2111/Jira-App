@@ -8,6 +8,23 @@ let deletebtn=false;
 let colors=['lightpink','blue','green','black'];
 var uid = new ShortUniqueId();
 let ticketarr=[];
+
+
+//After refresing the page or closing and opening the tab again the tickets still be in the UI.
+if(localStorage.getItem('tickets')){
+   ticketarrstr=localStorage.getItem('tickets');
+   ticketarr=JSON.parse(ticketarrstr);
+   for(let j=0;j<ticketarr.length;j++){
+    ticketcolormodel=ticketarr[j].color;
+    let task=ticketarr[j].task;
+    let ticketid=ticketarr[j].id;
+    ticketdisplay(task,ticketid);
+}
+
+}
+
+
+
 let allcolors=document.querySelectorAll(".tool");
 for(let i=0;i<allcolors.length;i++){
 
@@ -106,6 +123,9 @@ function ticketdisplay(task,ticketid){
     lockhandler(ticketcont);
     if(!ticketid){
         ticketarr.push({"task":task,"color":ticketcolormodel,"id":id});
+        //Converting the arr to string for local storage purpose
+        let ticketarrstr=JSON.stringify(ticketarr);
+        localStorage.setItem('tickets',ticketarrstr);
     }
     
 }
