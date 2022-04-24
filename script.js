@@ -121,8 +121,8 @@ function ticketdisplay(task,ticketid){
     <dic class="ticket-lock"><i class="fa fa-lock"></i></div>`;
     maincont.appendChild(ticketcont);
     tickethandler(ticketcont,id);
-    colorhandler(ticketcont);
-    lockhandler(ticketcont);
+    colorhandler(ticketcont,id,task);
+    lockhandler(ticketcont,id);
     if(!ticketid){
         ticketarr.push({"task":task,"color":ticketcolormodel,"id":id});
         //Converting the arr to string for local storage purpose
@@ -133,10 +133,11 @@ function ticketdisplay(task,ticketid){
 }
 
 //To create lock and unlock
-function lockhandler(ticket){
+function lockhandler(ticket,id){
    let ticketlockelement=ticket.querySelector(".ticket-lock i");
    let tickettaskarea=ticket.querySelector(".ticket-area");
    ticketlockelement.addEventListener("click",function(){
+       let ticketidx=getticketidx(id);
        if(ticketlockelement.classList.contains('fa-lock')){
          ticketlockelement.classList.remove("fa-lock");
          ticketlockelement.classList.add("fa-unlock");
@@ -148,6 +149,9 @@ function lockhandler(ticket){
         ticketlockelement.classList.add("fa-lock");
         tickettaskarea.setAttribute("contenteditable",'false');
        }
+       ticketarr[ticketidx].task=tickettaskarea.innerText;
+       localStorage.setItem('tickets',JSON.stringify(ticketarr));
+
    })
 }
 
@@ -178,17 +182,20 @@ function tickethandler(ticket,id){
 }
 
 //To change colors of the tickets
-function colorhandler(ticket){
+function colorhandler(ticket,id,task){
     let ticketcolor=ticket.querySelector('.ticket-color');
     ticketcolor.addEventListener('click',function(){
         let currenetcolor=ticketcolor.classList[1];
         let currenetcoloridx=colors.findIndex(function(color){
             return color===currenetcolor;
         })
+        let ticketidx=getticketidx(id);
         let newidx=(currenetcoloridx+1)%colors.length;
         let newcolor=colors[newidx];
         ticketcolor.classList.remove(currenetcolor);
         ticketcolor.classList.add(newcolor);
+        ticketarr[ticketidx].color=newcolor;
+        localStorage.setItem('tickets',JSON.stringify(ticketarr));
     })
 }
 
