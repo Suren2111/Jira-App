@@ -91,7 +91,7 @@ body{
 }
 .ticket-cont{
     background-color:lightgray;
-    height: 10rem;
+    height: 12rem;
     width: 14rem;
     border:none;
     
@@ -113,10 +113,11 @@ body{
 }
 .ticket-area{
     font-size: 1.5rem;
-    height: 4rem;
+    height: 6rem;
     padding-left: 1rem;
     padding-right: 1rem;
     outline: none;
+    overflow: auto;
   
 }
 .btncolor{
